@@ -1,0 +1,4 @@
+EPICS_BASE = /usr/local/epics/base-7.0.6.1
+PSCDRV = /usr/local/epics/pscdrv
+SEQ = /usr/local/epics/sequencer-main
+
