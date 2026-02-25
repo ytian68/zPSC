@@ -4,7 +4,7 @@
 
 
 # Flush reg to socket buffer, trigger send to send all socket buffer to PSC 
-#record(bo, "$(P){$(NO)}send") { 
+#record(bo, "$(P){$(DEVICE)$(NO)}send") { 
 #    field(DTYP, "PSC Ctrl Send All") 
 #    field(OUT , "@PSC$(NO)") 
 #    field(ZNAM, "Send") 
@@ -12,11 +12,11 @@
 #} 
  
 # Write a single register
-#record(longout, "$(P){$(NO)}GoRegSingleWrite") {
+#record(longout, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite") {
 #    field(DTYP, "PSC Ctrl Send")
 #    field(OUT , "@PSC$(NO)")
 #    field(VAL , "1") 
-#    field(FLNK, "$(P){$(NO)}send")
+#    field(FLNK, "$(P){$(DEVICE)$(NO)}send")
 #}
 
 
@@ -24,7 +24,7 @@
 
 
 
-record(mbbo, "$(P){$(NO)}Chan$(CHAN):DAC_OpMode-SP") {
+record(mbbo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DAC_OpMode-SP") {
     field(DESC, "Sets the DAC operating Mode")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) $(CHAN) 100")
@@ -39,337 +39,337 @@ record(mbbo, "$(P){$(NO)}Chan$(CHAN):DAC_OpMode-SP") {
     field( THVL, "3")
     #field( IVOA, "Don't drive outputs")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DAC_SetPt-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DAC_SetPt-SP") {
     field(DESC, "DAC Setpoint")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 104")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):DAC_RampRun-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DAC_RampRun-SP") {
     field(DESC, "DAC Run the Ramp Table")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) $(CHAN) 108")
 #    field(ZNAM,"Rdy")
 #    field(ONAM,"Trig")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
     field(HIGH,".01")    #500 ms after low
 }
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):RampTableLen-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTableLen-SP") {
     field(DESC, "DAC RampLength ")
     field(DTYP, "PSC Single I32")
     field(VAL, "50000")
     field(PINI, "YES")
     field(OUT , "@PSC$(NO) $(CHAN) 112")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DACSetPt-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DACSetPt-Gain-SP") {
     field(DESC, "DAC SetPoint Gain ")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 116")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DACSetPt-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DACSetPt-Offset-SP") {
     field(DESC, "DAC SetPoint Offset ")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 120")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DCCT1-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DCCT1-Offset-SP") {
     field(DESC, "DCCT 1 Offset Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 124")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DCCT1-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DCCT1-Gain-SP") {
     field(DESC, "DCCT 1 Gain Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 128")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DCCT2-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DCCT2-Offset-SP") {
     field(DESC, "DCCT 2 Offset Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 132")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DCCT2-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DCCT2-Gain-SP") {
     field(DESC, "DCCT 2 Gain Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 136")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DAC-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DAC-Offset-SP") {
     field(DESC, "DAC Setpoint Offset Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 140")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DAC-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DAC-Gain-SP") {
     field(DESC, "DAC Setpoint Gain Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 144")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Volt-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Volt-Offset-SP") {
     field(DESC, "Voltage Monitor Offset Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 148")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Volt-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Volt-Gain-SP") {
     field(DESC, "Voltage Monitor Gain Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 152")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Gnd-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Gnd-Offset-SP") {
     field(DESC, "Ground Monitor Offset Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 156")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Gnd-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Gnd-Gain-SP") {
     field(DESC, "Ground Monitor Gain Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 160")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Spare-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Spare-Offset-SP") {
     field(DESC, "Spare Monitor Offset Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 164")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Spare-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Spare-Gain-SP") {
     field(DESC, "Spare Monitor Gain Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 168")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Reg-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Reg-Offset-SP") {
     field(DESC, "Regulator Output Voltage Offset Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 172")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Reg-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Reg-Gain-SP") {
     field(DESC, "Regulator Output Voltage Gain Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 176")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Error-Offset-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Error-Offset-SP") {
     field(DESC, "Error Voltage Offset Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 180")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):Error-Gain-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Error-Gain-SP") {
     field(DESC, "Error Voltage Gain Readback")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 184")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):OVC1_Flt_Threshold-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):OVC1_Flt_Threshold-SP") {
     field(DESC, "DCCT1 OVC Fault Threshold")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 188")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):OVC2_Flt_Threshold-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):OVC2_Flt_Threshold-SP") {
     field(DESC, "DCCT2 OVC Fault Threshold")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 192")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):OVV_Flt_Threshold-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):OVV_Flt_Threshold-SP") {
     field(DESC, "OVV Fault Threshold")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 196")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):ERR1_Flt_Threshold-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):ERR1_Flt_Threshold-SP") {
     field(DESC, "ERR1 Fault Threshold")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 200")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):ERR2_Flt_Threshold-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):ERR2_Flt_Threshold-SP") {
     field(DESC, "ERR2 Fault Threshold")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 204")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):IGND_Flt_Threshold-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):IGND_Flt_Threshold-SP") {
     field(DESC, "Ignd Fault Threshold")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 208")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):OVC1_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):OVC1_Flt_CntLim-SP") {
     field(DESC, "DCCT1 OVC Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 212")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):OVC2_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):OVC2_Flt_CntLim-SP") {
     field(DESC, "DCCT2 OVC Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 216")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):OVV_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):OVV_Flt_CntLim-SP") {
     field(DESC, "OVV Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 220")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):ERR1_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):ERR1_Flt_CntLim-SP") {
     field(DESC, "PID Error 1 Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 224")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):ERR2_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):ERR2_Flt_CntLim-SP") {
     field(DESC, "PID Error 2  Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 228")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):IGND_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):IGND_Flt_CntLim-SP") {
     field(DESC, "Ignd Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 232")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):DCCT_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DCCT_Flt_CntLim-SP") {
     field(DESC, "DCCT Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 236")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):FLT1_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FLT1_Flt_CntLim-SP") {
     field(DESC, "Fault 1 Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 240")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):FLT2_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FLT2_Flt_CntLim-SP") {
     field(DESC, "Fault 2 Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 244")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):FLT3_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FLT3_Flt_CntLim-SP") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 248")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):ON_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):ON_Flt_CntLim-SP") {
     field(DESC, "PowerSupply ON Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 252")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):HeartBeat_Flt_CntLim-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):HeartBeat_Flt_CntLim-SP") {
     field(DESC, "HeartBeat Fault Counter Limit")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 256")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultClear-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultClear-SP") {
     field(DESC, "Fault Clear")
     field(DTYP, "PSC Single U32")   
     field(OUT , "@PSC$(NO) $(CHAN) 260")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
     field(HIGH,".01")    #500 ms after low
 }
 
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):FaultMask-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask-SP") {
     field(DESC, "Fault Mask")
     field(DTYP, "PSC Single I32")  
     field(OUT , "@PSC$(NO) $(CHAN) 264")
@@ -377,125 +377,125 @@ record(longout, "$(P){$(NO)}Chan$(CHAN):FaultMask-SP") {
     field(OMSL, "supervisory")    # Make sure we use VAL
     field(PINI, "YES")            # Process on IOC startup    
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B0-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B0-SP") {
     field(DESC, "Fault Mask Bit 0")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Lower6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Lower6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B1-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B1-SP") {
     field(DESC, "Fault Mask Bit 1")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Lower6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Lower6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B2-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B2-SP") {
     field(DESC, "Fault Mask Bit 2")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Lower6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Lower6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B3-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B3-SP") {
     field(DESC, "Fault Mask Bit 3")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Lower6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Lower6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B4-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B4-SP") {
     field(DESC, "Fault Mask Bit 4")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Lower6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Lower6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B5-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B5-SP") {
     field(DESC, "Fault Mask Bit 5")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Lower6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Lower6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B6-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B6-SP") {
     field(DESC, "Fault Mask Bit 6")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Mid6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Mid6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B7-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B7-SP") {
     field(DESC, "Fault Mask Bit 7")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Mid6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Mid6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B8-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B8-SP") {
     field(DESC, "Fault Mask Bit 8")
     field(VAL, "1")
     field(PINI, "YES")   
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Mid6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Mid6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B9-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B9-SP") {
     field(DESC, "Fault Mask Bit 9")
     field(VAL, "0")
     field(PINI, "YES")       
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Mid6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Mid6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B10-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B10-SP") {
     field(DESC, "Fault Mask Bit 10")
     field(VAL, "1")
     field(PINI, "YES")    
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Mid6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Mid6")
 }
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B11-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B11-SP") {
     field(DESC, "Fault Mask Bit 11")
     field(VAL, "1")
     field(PINI, "YES")
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:Mid6")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Mid6")
 }
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):FaultMask:B12-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B12-SP") {
     field(DESC, "Fault Mask Bit 12")
     field(VAL, "1")
     field(PINI, "YES")
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):FaultMask:All13")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:All13")
 }
 
-record(calcout, "$(P){$(NO)}Chan$(CHAN):FaultMask:Lower6") {
+record(calcout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Lower6") {
     field(DESC, "Bits 0-5")
-    field(INPA, "$(P){$(NO)}Chan$(CHAN):FaultMask:B0-SP.VAL NPP NMS")
-    field(INPB, "$(P){$(NO)}Chan$(CHAN):FaultMask:B1-SP.VAL NPP NMS")
-    field(INPC, "$(P){$(NO)}Chan$(CHAN):FaultMask:B2-SP.VAL NPP NMS")
-    field(INPD, "$(P){$(NO)}Chan$(CHAN):FaultMask:B3-SP.VAL NPP NMS")
-    field(INPE, "$(P){$(NO)}Chan$(CHAN):FaultMask:B4-SP.VAL NPP NMS")
-    field(INPF, "$(P){$(NO)}Chan$(CHAN):FaultMask:B5-SP.VAL NPP NMS")
+    field(INPA, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B0-SP.VAL NPP NMS")
+    field(INPB, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B1-SP.VAL NPP NMS")
+    field(INPC, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B2-SP.VAL NPP NMS")
+    field(INPD, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B3-SP.VAL NPP NMS")
+    field(INPE, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B4-SP.VAL NPP NMS")
+    field(INPF, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B5-SP.VAL NPP NMS")
     field(CALC, "A + B*2 + C*4 + D*8 + E*16 + F*32")
-    field(OUT , "$(P){$(NO)}Chan$(CHAN):FaultMask:All13.VAL PP NMS")
+    field(OUT , "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:All13.VAL PP NMS")
     field(DOPT, "Use CALC")    
     field(SCAN, "Passive") 
 }
 
-record(calcout, "$(P){$(NO)}Chan$(CHAN):FaultMask:Mid6") {
+record(calcout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Mid6") {
     field(DESC, "Bits 6-11")
-    field(INPA, "$(P){$(NO)}Chan$(CHAN):FaultMask:B6-SP.VAL NPP NMS")
-    field(INPB, "$(P){$(NO)}Chan$(CHAN):FaultMask:B7-SP.VAL NPP NMS")
-    field(INPC, "$(P){$(NO)}Chan$(CHAN):FaultMask:B8-SP.VAL NPP NMS")
-    field(INPD, "$(P){$(NO)}Chan$(CHAN):FaultMask:B9-SP.VAL NPP NMS")
-    field(INPE, "$(P){$(NO)}Chan$(CHAN):FaultMask:B10-SP.VAL NPP NMS")
-    field(INPF, "$(P){$(NO)}Chan$(CHAN):FaultMask:B11-SP.VAL NPP NMS")
+    field(INPA, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B6-SP.VAL NPP NMS")
+    field(INPB, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B7-SP.VAL NPP NMS")
+    field(INPC, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B8-SP.VAL NPP NMS")
+    field(INPD, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B9-SP.VAL NPP NMS")
+    field(INPE, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B10-SP.VAL NPP NMS")
+    field(INPF, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B11-SP.VAL NPP NMS")
     field(CALC, "A*64 + B*128 + C*256 + D*512 + E*1024 + F*2048")
-    field(OUT , "$(P){$(NO)}Chan$(CHAN):FaultMask:All13.VAL PP NMS")
+    field(OUT , "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:All13.VAL PP NMS")
     field(DOPT, "Use CALC")    
     field(SCAN, "Passive") 
 }
 
-record(calcout, "$(P){$(NO)}Chan$(CHAN):FaultMask:All13") {
+record(calcout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:All13") {
     field(DESC, "Combine bits 0-12")
-    field(INPA, "$(P){$(NO)}Chan$(CHAN):FaultMask:Lower6.VAL NPP NMS")
-    field(INPB, "$(P){$(NO)}Chan$(CHAN):FaultMask:Mid6.VAL NPP NMS")
-    field(INPC, "$(P){$(NO)}Chan$(CHAN):FaultMask:B12-SP.VAL NPP NMS")
+    field(INPA, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Lower6.VAL NPP NMS")
+    field(INPB, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:Mid6.VAL NPP NMS")
+    field(INPC, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask:B12-SP.VAL NPP NMS")
     field(CALC, "A + B + C*4096")
-    field(OUT , "$(P){$(NO)}Chan$(CHAN):FaultMask-SP.VAL PP NMS")
+    field(OUT , "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FaultMask-SP.VAL PP NMS")
     field(DOPT, "Use CALC")
     field(SCAN, "Passive") 
 }
@@ -504,125 +504,125 @@ record(calcout, "$(P){$(NO)}Chan$(CHAN):FaultMask:All13") {
 
 
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):DigOut_ON1-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DigOut_ON1-SP") {
     field(DESC, "Digital Output ON1")
     field(DTYP, "PSC Single I32")
     field(PINI, "YES")
     field(VAL, "0")     
     field(OUT , "@PSC$(NO) $(CHAN) 268")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):DigOut_ON2-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DigOut_ON2-SP") {
     field(DESC, "Digital Output ON2")
     field(DTYP, "PSC Single I32")
     field(OUT , "@PSC$(NO) $(CHAN) 272")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):DigOut_Reset-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DigOut_Reset-SP") {
     field(DESC, "Digital Output Reset")
     field(DTYP, "PSC Single I32")
     field(OUT , "@PSC$(NO) $(CHAN) 276")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):DigOut_Spare-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DigOut_Spare-SP") {
     field(DESC, "Digital Output Spare")
     field(DTYP, "PSC Single I32")
     field(OUT , "@PSC$(NO) $(CHAN) 280")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):DigOut_Park-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):DigOut_Park-SP") {
     field(DESC, "Digital Output Park")
     field(DTYP, "PSC Single I32")
     field(OUT , "@PSC$(NO) $(CHAN) 284")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):PostTrigNumPts-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):PostTrigNumPts-SP") {
     field(DESC, "For Shot Mode selects Num Samples")
     field(DTYP, "PSC Single I32")
     field(OUT , "@PSC$(NO) $(CHAN) 288")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):SF:AmpsperSec-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):SF:AmpsperSec-SP") {
     field(DESC, "ScaleFactor Amps per Second")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 300")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):SF:DAC_DCCTs-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):SF:DAC_DCCTs-SP") {
     field(DESC, "ScaleFactor DAC & DCCTs")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 304")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):SF:Vout-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):SF:Vout-SP") {
     field(DESC, "ScaleFactor Vout")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 308")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):SF:Ignd-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):SF:Ignd-SP") {
     field(DESC, "ScaleFactor Ignd")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 312")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):SF:Spare-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):SF:Spare-SP") {
     field(DESC, "ScaleFactor Spare")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 316")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):SF:Regulator-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):SF:Regulator-SP") {
     field(DESC, "ScaleFactor Regulator")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 320")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(ao, "$(P){$(NO)}Chan$(CHAN):SF:Error-SP") {
+record(ao, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):SF:Error-SP") {
     field(DESC, "ScaleFactor Amps per Second")
     field(DTYP, "PSC Single F32")
     field(OUT , "@PSC$(NO) $(CHAN) 324")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
 
-record(longout, "$(P){$(NO)}Chan$(CHAN):FOFB:FastAddr-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):FOFB:FastAddr-SP") {
     field(DESC, "Digital Output Park")
     field(DTYP, "PSC Single I32")
     field(OUT , "@PSC$(NO) $(CHAN) 330")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):SS:Trig:Usr") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):SS:Trig:Usr") {
     field(DESC, "Trigger User Channel 1")
     field(DTYP, "PSC Single U32") 
     field(OUT , "@PSC$(NO) $(CHAN) 340")      
@@ -630,11 +630,11 @@ record(bo, "$(P){$(NO)}Chan$(CHAN):SS:Trig:Usr") {
     field(ONAM, "Trigger")
     field(VAL, "0")
     field(HIGH, "1")   # Bit 0
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
 
-record(mbbo, "$(P){$(NO)}Chan$(CHAN):AveMode-SP") {
+record(mbbo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):AveMode-SP") {
     field(DESC, "Sets the Averaging mode for 10Hz data")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) $(CHAN) 350")
@@ -649,53 +649,53 @@ record(mbbo, "$(P){$(NO)}Chan$(CHAN):AveMode-SP") {
     field( THVL, "3")
     #field( IVOA, "Don't drive outputs")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
 }
 
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):WriteQspi-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):WriteQspi-SP") {
     field(DESC, "Write Current Settings to Qspi")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) $(CHAN) 400")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
     field(HIGH,".01")    #500 ms after low
 }
 
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):ReadQspi-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):ReadQspi-SP") {
     field(DESC, "Read Current Settings from Qspi")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) $(CHAN) 404")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite$(CHAN)")
     field(HIGH,".01")    #500 ms after low
 }
 
 
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):RampTable-Read") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-Read") {
     field(DESC, "Trigger readFile aSub")
     field(DTYP, "Soft Channel")
     field(ZNAM, "Off")
     field(ONAM, "On")
     field(VAL, "0")
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):RampTable-ReadFile")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-ReadFile")
     field(HIGH,".01")    #500 ms after low   
 }
 
-record(stringin, "$(P){$(NO)}Chan$(CHAN):RampTable-FilePath") {
+record(stringin, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-FilePath") {
     field(DESC, "File path")
     field(VAL, "/home/")      # default value
 }
 
-record(stringin, "$(P){$(NO)}Chan$(CHAN):RampTable-FileName") {
+record(stringin, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-FileName") {
     field(DESC, "File name")
     field(VAL, "data.txt")  # default value  
 }
 
-record(aSub, "$(P){$(NO)}Chan$(CHAN):RampTable-ReadFile") {
+record(aSub, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-ReadFile") {
     field(DESC, "Read Ramptable from file")
-    field(INPA, "$(P){$(NO)}Chan$(CHAN):RampTable-FilePath PP")    
-    field(INPB, "$(P){$(NO)}Chan$(CHAN):RampTable-FileName PP")   
+    field(INPA, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-FilePath PP")    
+    field(INPB, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-FileName PP")   
     field(INPC, "50000")        
     field(FTA,  STRING)
     field(FTB,  STRING)
@@ -705,25 +705,25 @@ record(aSub, "$(P){$(NO)}Chan$(CHAN):RampTable-ReadFile") {
     field(NOVA, "50000")        
     field(NEVA, "50000")    
     field(SNAM, "readRampTable")
-    field(OUTA, "$(P){$(NO)}Chan$(CHAN):RampTable-Wfm PP MS")
-    field(OUTB, "$(P){$(NO)}Chan$(CHAN):RampTableLen-SP PP MS")
-    field(FLNK, "$(P){$(NO)}Chan$(CHAN):Waveform-Wfm.PROC")  
+    field(OUTA, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-Wfm PP MS")
+    field(OUTB, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTableLen-SP PP MS")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):Waveform-Wfm.PROC")  
 }
 
-record(waveform, "$(P){$(NO)}Chan$(CHAN):RampTable-Wfm") {
+record(waveform, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):RampTable-Wfm") {
     field(DESC, "Buffer to PSC")
     field(DTYP, "PSC Block F32 Out")
     field(INP , "@PSC$(NO) 101")   
     field(FTVL, "DOUBLE")
     field(NELM, "50000")
-    field(FLNK, "$(P){$(NO)}send")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}send")
 }
 
 #-----------------------------------------------
 #------------FSM Readbacks----------------------
 #-----------------------------------------------
 
-record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
+record(stringout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN)_seq_messages") {
     field(DESC, "Message box from seq")
 }
 
@@ -731,19 +731,19 @@ record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
 #-------------AutoZero Readbacks----------------
 #-----------------------------------------------
 
-record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_messages") {
+record(stringout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN)_atzo_messages") {
     field(DESC, "Message box from seq")
 }
 
-record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg1_messages") {
+record(stringout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN)_atzo_dbg1_messages") {
     field(DESC, "Message box from seq")
 }
 
-record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg2_messages") {
+record(stringout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN)_atzo_dbg2_messages") {
     field(DESC, "Message box from seq")
 }
 
-record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg3_messages") {
+record(stringout, "$(P){$(DEVICE)$(NO)}Chan$(CHAN)_atzo_dbg3_messages") {
     field(DESC, "Message box from seq")
 }
 
@@ -751,13 +751,13 @@ record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg3_messages") {
 #------------FSM ON/OFF Button------------------
 #-----------------------------------------------
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):PSOnOff-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}Chan$(CHAN):PSOnOff-SP") {
     field(ZNAM, "LOW")
     field(ONAM, "HIGH")  
     field(HIGH,".01")    #500 ms after low
 }
 
-record(bo,"$(P){$(NO)}Chan$(CHAN):AutoZero-SP") {
+record(bo,"$(P){$(DEVICE)$(NO)}Chan$(CHAN):AutoZero-SP") {
     field(ZNAM, "LOW")
     field(ONAM, "HIGH")  
     field(HIGH,".01")    #500 ms after low
@@ -767,7 +767,7 @@ record(bo,"$(P){$(NO)}Chan$(CHAN):AutoZero-SP") {
 #----------------FSM Status---------------------
 #-----------------------------------------------
 
-record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
+record(mbbo,"$(P){$(DEVICE)$(NO)}Chan$(CHAN):PSOnOff-STS")
 {
 	field(ONST, "DONE")
 	field(ZRST, "Please wait...") 
@@ -775,7 +775,7 @@ record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
 	field(DESC, "PS Operation Mode Change")
 }
 
-record(mbbo,"$(P){$(NO)}Chan$(CHAN):AutoZero-STS")
+record(mbbo,"$(P){$(DEVICE)$(NO)}Chan$(CHAN):AutoZero-STS")
 {
 	field(ONST, "Please wait...")
 	field(ZRST, "DONE") 

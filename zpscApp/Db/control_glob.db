@@ -4,7 +4,7 @@
 
 
 # Flush reg to socket buffer, trigger send to send all socket buffer to PSC 
-record(bo, "$(P){$(NO)}send") { 
+record(bo, "$(P){$(DEVICE)$(NO)}send") { 
     field(DTYP, "PSC Ctrl Send All") 
     field(OUT , "@PSC$(NO)") 
     field(ZNAM, "Send") 
@@ -15,54 +15,54 @@ record(bo, "$(P){$(NO)}send") {
 
  
 # Write a single register
-record(longout, "$(P){$(NO)}GoRegSingleWrite0") {
+record(longout, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0") {
     field(DTYP, "PSC Ctrl Send")
     field(OUT , "@PSC$(NO)")
     field(VAL , "0") 
-    field(FLNK, "$(P){$(NO)}send")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}send")
 }
  
 # Write a single register
-record(longout, "$(P){$(NO)}GoRegSingleWrite1") {
+record(longout, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite1") {
     field(DTYP, "PSC Ctrl Send")
     field(OUT , "@PSC$(NO)")
     field(VAL , "1") 
-    field(FLNK, "$(P){$(NO)}send")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}send")
 }
 
 # Write a single register
-record(longout, "$(P){$(NO)}GoRegSingleWrite2") {
+record(longout, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite2") {
     field(DTYP, "PSC Ctrl Send")
     field(OUT , "@PSC$(NO)")
     field(VAL , "2") 
-    field(FLNK, "$(P){$(NO)}send")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}send")
 }
 
 # Write a single register
-record(longout, "$(P){$(NO)}GoRegSingleWrite3") {
+record(longout, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite3") {
     field(DTYP, "PSC Ctrl Send")
     field(OUT , "@PSC$(NO)")
     field(VAL , "3") 
-    field(FLNK, "$(P){$(NO)}send")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}send")
 }
 
 
 # Write a single register
-record(longout, "$(P){$(NO)}GoRegSingleWrite4") {
+record(longout, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite4") {
     field(DTYP, "PSC Ctrl Send")
     field(OUT , "@PSC$(NO)")
     field(VAL , "4") 
-    field(FLNK, "$(P){$(NO)}send")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}send")
 }
 
-#record(waveform, "$(P){$(NO)}Waveform-Test") {
+#record(waveform, "$(P){$(DEVICE)$(NO)}Waveform-Test") {
 #    field(DESC, "Buffer to PSC")
 #    field(DTYP, "PSC Block F32 Out")
 #    field(INP , "@PSC$(NO) 101")   
 #    field(FTVL, "DOUBLE")
 #    field(NELM, "20")
 #    #field(SCAN, "1 second")
-#    field(FLNK, "$(P){$(NO)}send")
+#    field(FLNK, "$(P){$(DEVICE)$(NO)}send")
 #}
 
 
@@ -71,7 +71,7 @@ record(longout, "$(P){$(NO)}GoRegSingleWrite4") {
 
 ############# Control PV's ##########################################
 
-record(stringin, "$(P){$(NO)}RampTableFile") {
+record(stringin, "$(P){$(DEVICE)$(NO)}RampTableFile") {
     field(DESC, "Selected File Path")
     field(VAL, "/default/path/to/file.txt")
 }
@@ -80,27 +80,27 @@ record(stringin, "$(P){$(NO)}RampTableFile") {
 
 ### Global Settings
 
-record(bo, "$(P){$(NO)}KeepAlive-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}KeepAlive-SP") {
     field(DESC, "Keeps the socket active")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) 5 100")
     field(SCAN, "1 second")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
 
 
-#record(bo, "$(P){$(NO)}Trig:Usr-SP") {
+#record(bo, "$(P){$(DEVICE)$(NO)}Trig:Usr-SP") {
 #    field(DESC, "Soft Trigger by user")
 #    field(DTYP, "PSC Single U32")
 #    field(OUT , "@PSC$(NO) 0 0")
 #    field(ZNAM,"Rdy")
 #    field(ONAM,"Trig")
-#    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+#    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 #    field(HIGH,".5")    #500 ms after low
 #}
 
-record(mbbo, "$(P){$(NO)}Trig:Usr-SP") {
+record(mbbo, "$(P){$(DEVICE)$(NO)}Trig:Usr-SP") {
     field(DESC, "Soft Trigger by user")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) 0 0")
@@ -112,14 +112,14 @@ record(mbbo, "$(P){$(NO)}Trig:Usr-SP") {
     field( ONVL, "2")
     field( TWVL, "4")
     field( THVL, "8")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
  
  
 
 
 # Testing PV's, will be removed
-record(mbbo, "$(P){$(NO)}Trig:Fault-SP") {
+record(mbbo, "$(P){$(DEVICE)$(NO)}Trig:Fault-SP") {
     field(DESC, "Simulate a fault trigger")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) 0 4")
@@ -150,75 +150,75 @@ record(mbbo, "$(P){$(NO)}Trig:Fault-SP") {
     field( TEVL, "1024")  # Bit 10
     field( ELVL, "2048")  # Bit 11
     field( TVVL, "4096")  # Bit 12     
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
  
 }
 
 
 
 
-record(bo, "$(P){$(NO)}LEDs-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}LEDs-SP") {
     field(DESC, "Control the LEDs on the PSC")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) 0 8")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
-record(bo, "$(P){$(NO)}EVR:Reset-SP") {
+record(bo, "$(P){$(DEVICE)$(NO)}EVR:Reset-SP") {
     field(DESC, "EVR Reset")
     field(DTYP, "PSC Single U32")
     field(OUT , "@PSC$(NO) 0 16")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
 
-record(longout, "$(P){$(NO)}EVR:Inj-EventNo-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}EVR:Inj-EventNo-SP") {
     field(DESC, "EVR Event Code for Injection Event")
     field(DTYP, "PSC Single I32")  
     field(OUT , "@PSC$(NO) 0 20")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
-record(longout, "$(P){$(NO)}EVR:PM-EventNo-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}EVR:PM-EventNo-SP") {
     field(DESC, "EVR Event Code for Post Mortem Event")
     field(DTYP, "PSC Single I32")  
     field(OUT , "@PSC$(NO) 0 24")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
-record(longout, "$(P){$(NO)}EVR:1Hz-EventNo-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}EVR:1Hz-EventNo-SP") {
     field(DESC, "EVR Event Code for 1Hz Event")
     field(DTYP, "PSC Single I32")  
     field(OUT , "@PSC$(NO) 0 28")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
-record(longout, "$(P){$(NO)}EVR:10Hz-EventNo-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}EVR:10Hz-EventNo-SP") {
     field(DESC, "EVR Event Code for 10Hz Event")
     field(DTYP, "PSC Single I32")  
     field(OUT , "@PSC$(NO) 0 32")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
-record(longout, "$(P){$(NO)}EVR:10KHz-EventNo-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}EVR:10KHz-EventNo-SP") {
     field(DESC, "EVR Event Code for 10KHz Event")
     field(DTYP, "PSC Single I32")  
     field(OUT , "@PSC$(NO) 0 36")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
 
-record(longout, "$(P){$(NO)}FOFB:IPaddr-SP") {
+record(longout, "$(P){$(DEVICE)$(NO)}FOFB:IPaddr-SP") {
     field(DESC, "IP Address for FOFB")
     field(DTYP, "PSC Single I32")  
     field(OUT , "@PSC$(NO) 0 50")
     info(autosaveFields, "VAL")
-    field(FLNK, "$(P){$(NO)}GoRegSingleWrite0")
+    field(FLNK, "$(P){$(DEVICE)$(NO)}GoRegSingleWrite0")
 }
 
 

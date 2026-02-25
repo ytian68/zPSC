@@ -25,7 +25,7 @@ zpsc_DBD += ch_fsm.dbd
 
 
 # Include dbd files from all support applications:
-#zpsc_DBD += pscCore.dbd
+zpsc_DBD += pscCore.dbd
 zpsc_DBD += scaleWaveform.dbd
 zpsc_DBD += epoch2string.dbd
 zpsc_DBD += devRollingBuf.dbd
