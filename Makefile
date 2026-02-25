@@ -9,7 +9,7 @@ DIRS += $(wildcard *App)
 DIRS += $(wildcard *Top)
 DIRS += $(wildcard iocBoot)
 
-zpscApp_DEPEND_DIRS = coreApp
+#zpscApp_DEPEND_DIRS = coreApp
 
 # The build order is controlled by these dependency rules:
 
