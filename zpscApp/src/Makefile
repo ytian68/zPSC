@@ -25,7 +25,7 @@ zpsc_DBD += ch_fsm.dbd
 
 
 # Include dbd files from all support applications:
-#zpsc_DBD += pscCore.dbd
+zpsc_DBD += pscCore.dbd
 zpsc_DBD += scaleWaveform.dbd
 zpsc_DBD += epoch2string.dbd
 zpsc_DBD += devRollingBuf.dbd
@@ -34,7 +34,7 @@ zpsc_DBD += readRampTable.dbd
 zpsc_DBD += sumTwoFloats.dbd
 
 # Add all the support libraries needed by this IOC
-#zpsc_LIBS += pscCore
+zpsc_LIBS += pscCore
 #zpsc_LIBS += seq pv
 
 # Add your custom C source here:
