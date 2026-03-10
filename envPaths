@@ -1,3 +1,0 @@
-epicsEnvSet("IOC","ioczpsc")
-epicsEnvSet("TOP","/var/tmp/ytian/epics/zpsc/zPSC2-ioc")
-epicsEnvSet("EPICS_BASE","/usr/lib/epics")
