@@ -34,9 +34,13 @@ zpsc_DBD += devRollingBuf_varlen.dbd
 zpsc_DBD += readRampTable.dbd
 zpsc_DBD += sumTwoFloats.dbd
 zpsc_DBD += devIocStats.dbd
+zpsc_DBD += reccaster.dbd
+zpsc_DBD += asSupport.dbd
 # Add all the support libraries needed by this IOC
 zpsc_LIBS += pscCore
 zpsc_LIBS += devIocStats
+zpsc_LIBS += reccaster
+zpsc_LIBS += autosave
 #zpsc_LIBS += seq pv
 
 # Add your custom C source here:
