@@ -20,8 +20,9 @@ DBD += zpsc.dbd
 
 # zpsc.dbd will be made up from these files:
 zpsc_DBD += base.dbd
-#zpsc_DBD += seqSoftIoc.dbd    # ADD THIS LINE
+
 zpsc_DBD += ch_fsm.dbd
+zpsc_DBD += bud_fsm.dbd
 
 
 # Include dbd files from all support applications:
@@ -55,6 +56,7 @@ zpsc_SRCS_vxWorks += -nil-
 # Add support from base/src/vxWorks if needed
 #zpsc_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 zpsc_SRCS += ch_fsm.st
+zpsc_SRCS += bud_fsm.st
 
 
 # Finally link to the EPICS Base libraries
