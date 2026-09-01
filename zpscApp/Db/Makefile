@@ -7,6 +7,7 @@ include $(TOP)/configure/CONFIG
 # Create and install (or just install) into <top>/db
 # databases, templates, substitutions like this
 #DB += xxx.db
+DB += bpc.db
 DB += control_glob.db
 DB += control_chan.db
 DB += lstats.db
